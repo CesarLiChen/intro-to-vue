@@ -11,7 +11,10 @@
         <p>Dynamic content under this!</p>
 
         <p id="app">
-            MESSAGE: {{ message }}
+            {{ r }}
+            <span v-if="r > 0.5">Greater</span>
+            <span v-else-if="r < 0.5">Smaller</span>
+            <span v-else>Equal</span>
         </p>
 
         <p><i>Footer.</i></p>
@@ -19,11 +22,12 @@
         <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script>
 
         <script>
-            new Vue({
+            let app = new Vue({
                 el: "#app",
 
                 data: {
-                    message: "The message, sir."
+                    message: "The message, sir.",
+                    r: 0.9,
                 },
             });
         </script>
