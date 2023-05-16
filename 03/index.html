@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>The Vue Framework - 2.5.17</title>
+    </head>
+
+    <body>
+        <h1>Learning Vue.js</h1>
+
+        <p>Dynamic content under this!</p>
+
+        <p id="app">
+            MESSAGE: {{ message }}
+        </p>
+
+        <p><i>Footer.</i></p>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script>
+
+        <script>
+            new Vue({
+                el: "#app",
+
+                data: {
+                    message: "The message, sir."
+                },
+            });
+        </script>
+    </body>
+</html>
