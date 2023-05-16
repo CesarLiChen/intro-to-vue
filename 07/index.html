@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>The Vue Framework - 2.5.17</title>
+    </head>
+
+    <body>
+        <h1>Learning Vue.js</h1>
+
+        <p>Dynamic content under this!</p>
+
+        <div id="app">
+            <p>{{clicks}}</p>
+            <button v-on:click="clicks += 1">Clicks</button>
+
+            <p>Random number from 0 - 10 => {{num}}</p>
+            <button v-on:click="num = Math.floor(Math.random() * 11)">Random number</button>
+
+            <p>Random number from 1 - 10 => {{num1}}</p>
+            <button v-on:click="num1 = Math.floor(Math.random() * 10) + 1">Random number</button>
+
+            <p v-on:mouseover="num2 = Math.random()">Random number by hovering => {{num2}}</p>
+        </div>
+
+        <p><i>Footer.</i></p>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script>
+
+        <script>
+            let app = new Vue({
+                el: "#app",
+
+                data: {
+                    message: "The message, sir.",
+                    todos: [
+                        "Take out bird",
+                        "Clean crocodile",
+                        "Think of more things to do",
+                    ],
+                    clicks: 0,
+                    num: 0,
+                    num1: 0,
+                    num2: 0,
+                },
+            });
+        </script>
+    </body>
+</html>
