@@ -19,7 +19,7 @@
             <h3> Not done: </h3>
             <ul>
                 <li class="list-item" v-for="task in notDoneTasks" 
-                    v-on:click="task.done = !task.done">
+                    v-on:click="toggleDone(task)">
                     <span>
                         {{task.text}}
                     </span>
@@ -29,7 +29,7 @@
             <h3> Done: </h3>
             <ul>
                 <li class="list-item" v-for="task in doneTasks" 
-                    v-on:click="task.done = !task.done">
+                    v-on:click="toggleDone(task)">
                     <span>
                         <s>{{task.text}}</s>
                     </span>
@@ -75,6 +75,13 @@
                         }
                         return out;
                     },
+                },
+
+                methods: {
+                    toggleDone: function(task) {
+                        task.done = !task.done;
+                        console.log("Toggled");
+                    }
                 },
             });
         </script>
