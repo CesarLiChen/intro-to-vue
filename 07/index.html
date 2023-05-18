@@ -3,6 +3,11 @@
     <head>
         <meta charset='utf-8'>
         <title>The Vue Framework - 2.5.17</title>
+        <style>
+            .list-item {
+                cursor: pointer;
+            }
+        </style>
     </head>
 
     <body>
@@ -11,16 +16,17 @@
         <p>Dynamic content under this!</p>
 
         <div id="app">
-            <p>{{clicks}}</p>
-            <button v-on:click="clicks += 1">Clicks</button>
+            <ul>
+                <li class="list-item" v-for="task in todos" v-on:click="task.done = !task.done">
+                    <span v-if="task.done">
+                        <s>{{task.text}}</s>
+                    </span>
 
-            <p>Random number from 0 - 10 => {{num}}</p>
-            <button v-on:click="num = Math.floor(Math.random() * 11)">Random number</button>
-
-            <p>Random number from 1 - 10 => {{num1}}</p>
-            <button v-on:click="num1 = Math.floor(Math.random() * 10) + 1">Random number</button>
-
-            <p v-on:mouseover="num2 = Math.random()">Random number by hovering => {{num2}}</p>
+                    <span v-else>
+                        {{task.text}}
+                    </span>
+                </li>
+            </ul>
         </div>
 
         <p><i>Footer.</i></p>
@@ -28,20 +34,17 @@
         <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script>
 
         <script>
+            console.log("Working");
             let app = new Vue({
                 el: "#app",
 
                 data: {
                     message: "The message, sir.",
                     todos: [
-                        "Take out bird",
-                        "Clean crocodile",
-                        "Think of more things to do",
+                        {text: "Take out bird", done: false},
+                        {text: "Clean crocodile", done: false},
+                        {text: "Think of more things to do", done:false},
                     ],
-                    clicks: 0,
-                    num: 0,
-                    num1: 0,
-                    num2: 0,
                 },
             });
         </script>
