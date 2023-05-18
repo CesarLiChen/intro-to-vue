@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>The Vue Framework - 2.5.17</title>
+        <style>
+            .list-item {
+                cursor: pointer;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>Learning Vue.js</h1>
+
+        <p>Dynamic content under this!</p>
+
+        <div id="app">
+
+            <div>
+                <input type="text" v-model="newTask">
+                <button v-on:click="addNewTask">Add task</button>
+            </div>
+
+            <h3> Not done: </h3>
+            <ul>
+                <li class="list-item" v-for="task in notDoneTasks" 
+                    v-on:click="toggleDone(task)">
+                    <span>
+                        {{task.text}}
+                    </span>
+                </li>
+            </ul>
+
+            <h3> Done: </h3>
+            <ul>
+                <li class="list-item" v-for="task in doneTasks" 
+                    v-on:click="toggleDone(task)">
+                    <span>
+                        <s>{{task.text}}</s>
+                    </span>
+                </li>
+            </ul>
+        </div>
+
+        <p><i>Footer.</i></p>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script>
+
+        <script>
+            console.log("Working");
+            let app = new Vue({
+                el: "#app",
+
+                data: {
+                    message: "The message, sir.",
+                    todos: [
+                        {text: "Take out bird", done: false},
+                        {text: "Clean crocodile", done: false},
+                        {text: "Think of more things to do", done:true},
+                    ],
+                    newTask: "placeholder",
+                },
+
+                computed: {
+                    notDoneTasks: function() {
+                        let out = [];
+                        for (let i = 0; i < this.todos.length; i++) {
+                            if (!this.todos[i].done) {
+                                out.push(this.todos[i]);
+                            }
+                        }
+                        return out;
+                    },
+
+                    doneTasks: function() {
+                        let out = [];
+                        for (let i = 0; i < this.todos.length; i++) {
+                            if (this.todos[i].done) {
+                                out.push(this.todos[i]);
+                            }
+                        }
+                        return out;
+                    },
+                },
+
+                methods: {
+                    toggleDone: function(task) {
+                        task.done = !task.done;
+                        console.log("Toggled");
+                    },
+
+                    addNewTask: function() {
+                        this.todos.push({
+                            text: this.newTask,
+                            done: false,
+                        });
+
+                        this.newTask = "";
+                    },
+                },
+            });
+        </script>
+    </body>
+</html>
