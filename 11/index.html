@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Bind data to html attributes.</title>
+
+        <style>
+            .post-container {
+                background-color: darkgrey;
+                padding: 1rem;
+                margin-bottom: 1rem;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div id="app">
+            <div v-for="post in posts" class="post-container">
+                <b>{{post.user}}</b> says: {{post.text}}
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script>
+
+        <script>
+            let app = new Vue({
+                el: "#app",
+
+                data: {
+                    posts: [
+                        {text: "I'm Batman", user: "Bruce", image:""},
+                        {text: "I'm the fastest man alive!", user: "Barry", image:""},
+                        {text: "I'm inevitable", user:"Thanos", image:""},
+                    ],
+                },
+            });
+        </script>
+    </body>
+</html>
