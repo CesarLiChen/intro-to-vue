@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Vue - components.</title>
+
+        <style>
+            svg {
+                fill: green;
+                margin-bottom: 1rem;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div id="app">
+            <bar-element v-for="number in numbers"></bar-element>>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script>
+
+        <script>
+            Vue.component("bar-element", {
+                template: `
+                    <svg v-for="number in numbers" viewBox="0 0 200 10">
+                        <rect x="0" y="0" v-bind:width="number" height="10" />
+                    </svg>"
+                `,
+            });
+
+            let app = new Vue({
+                el: "#app",
+
+                data: {
+                    numbers: [20, 50, 80, 90, 30],
+                },
+            });
+        </script>
+    </body>
+</html>
