@@ -17,6 +17,7 @@
 
         <div id="app">
             <div v-for="post in posts" class="post-container">
+                <img v-bind:src="post.image" width="25" height="25">
                 <b>{{post.user}}</b> says: {{post.text}}
             </div>
         </div>
@@ -29,9 +30,9 @@
 
                 data: {
                     posts: [
-                        {text: "I'm Batman", user: "Bruce", image:""},
-                        {text: "I'm the fastest man alive!", user: "Barry", image:""},
-                        {text: "I'm inevitable", user:"Thanos", image:""},
+                        {text: "I'm Batman", user: "Bruce", image:"batman.jpg"},
+                        {text: "I'm the fastest man alive!", user: "Barry", image:"flash.jpg"},
+                        {text: "I'm inevitable", user:"Thanos", image:"thanos.jpg"},
                     ],
                 },
             });
