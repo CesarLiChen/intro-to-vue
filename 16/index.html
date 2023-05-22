@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>The Vue Framework - 2.5.17</title>
+        <style>
+            .list-item {
+                cursor: pointer;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>Learning Vue.js</h1>
+
+        <p>Dynamic content under this!</p>
+
+        <div id="app">
+
+            <div>
+                <input type="text" v-model="newTask">
+                <button v-on:click="addNewTask">Add task</button>
+            </div>
+
+            <h3> Not done: </h3>
+            <ul>
+                <task-list-item v-for="task in notDoneTasks" v-bind:tsk="task"
+                    v-on:toggle="toggleDone">
+
+                </task-list-item>
+            </ul>
+
+            <h3> Done: </h3>
+            <ul>
+                <task-list-item v-for="task in doneTasks" v-bind:tsk="task" 
+                    v-on:toggle="toggleDone">
+
+                </task-list-item>
+            </ul>
+        </div>
+
+        <p><i>Footer.</i></p>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script>
+
+        <script>
+            console.log("Working");
+            Vue.component("task-list-item", {
+                props: ["tsk"],
+
+                template: `
+                    <li class="list-item" v-on:click="toggleDoneComponent(tsk)">
+                        {{tsk.text}}
+                    </li>
+                `,
+
+                methods: {
+                    toggleDoneComponent: function(task) {
+                        this.$emit("toggle", task);
+                    }
+                }
+            });
+
+            let app = new Vue({
+                el: "#app",
+
+                data: {
+                    message: "The message, sir.",
+                    todos: [
+                        // {text: "Take out bird", done: false},
+                        // {text: "Clean crocodile", done: false},
+                        // {text: "Think of more things to do", done:true},
+                    ],
+                    newTask: "placeholder",
+                },
+
+                computed: {
+                    notDoneTasks: function() {
+                        let out = [];
+                        for (let i = 0; i < this.todos.length; i++) {
+                            if (!this.todos[i].done) {
+                                out.push(this.todos[i]);
+                            }
+                        }
+                        return out;
+                    },
+
+                    doneTasks: function() {
+                        let out = [];
+                        for (let i = 0; i < this.todos.length; i++) {
+                            if (this.todos[i].done) {
+                                out.push(this.todos[i]);
+                            }
+                        }
+                        return out;
+                    },
+                },
+
+                methods: {
+                    toggleDone: function(task) {
+                        task.done = !task.done;
+                        console.log("Toggled");
+                        this.save();
+                    },
+
+                    addNewTask: function() {
+                        this.todos.push({
+                            text: this.newTask,
+                            done: false,
+                        });
+
+                        this.newTask = "";
+                        this.save();
+                    },
+
+                    save: function() {
+                        localStorage.setItem("todos", JSON.stringify(this.todos));
+                    },
+                },
+
+                mounted: function() {
+                    if (localStorage.hasOwnProperty("todos")) {
+                        this.todos = JSON.parse(localStorage.getItem("todos"));
+                    }
+                },
+            });
+        </script>
+    </body>
+</html>
